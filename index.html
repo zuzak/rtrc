@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect( 'http://chippy.ch:3005' );
+        socket.on( 'edit', function ( data ) {
+                var edit = document.createElement( 'li' );
+                edit.innerHTML = data.lang;
+                edit.className = data.lang;
+                console.log(data.href);
+                document.getElementById( 'edits' ).appendChild( edit );
+        } );
+    </script>
+    <style>
+        body {
+            word-wrap: break-word;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li{
+            padding:0.2em;
+            display:inline-block;
+            font-family:monospace;
+        }
+        .de { background-color: red }
+        .en { background-color: orange  }
+        .es { background-color: crimson }
+        .fr { background-color: yellow  }
+        .it { background-color: silver }
+        .ja { background-color: cyan }
+        .pl { background-color: pink }
+        .pt { background-color: lime  }
+        .ru { background-color: gray }
+        .zh { background-color: purple }
+    </style>
+</head>
+<body>
+    <h1>Real time edits from the top ten Wikipedias</h1>
+    <ul id="edits"></ul>
+</body>
